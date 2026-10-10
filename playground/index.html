@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVPlot-UI</title>
+    <style>
+        @import "tailwindcss";
+        @source "../src";
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <div id="panel-container" class="z-30 fixed inset-0 pointer-events-none isolate"></div>
+    <script type="module">
+        import { createApp } from 'vue'
+        import App from './index.vue'
+        import VVPlotUI from '#base/index.ts'
+
+        import { addCollection } from '@iconify/vue'
+        import lucideIcons from '@iconify-json/lucide/icons.json'
+        addCollection(lucideIcons)
+
+        let app = createApp(App)
+        app.use(VVPlotUI)
+        app.mount('#app')
+    </script>
+</body>
+
+</html>
