@@ -1,6 +1,6 @@
 <script setup>
-import { ref, watch, useTemplateRef, nextTick } from 'vue'
-import { useMouse, useWindowSize } from '@vueuse/core'
+import { ref, computed, watch, useTemplateRef, nextTick } from 'vue'
+import { useMouse, useWindowSize, useMouseInElement } from '@vueuse/core'
 import Menu from './Menu.vue'
 defineOptions({ inheritAttrs: false })
 const { teleport, align, side, offset } = defineProps({
@@ -13,7 +13,17 @@ const dismissible = defineModel('dismissible', { type: Boolean, default: true })
 const emit = defineEmits(['hide'])
 
 const menu = useTemplateRef('menu')
-const { x: mouseX, y: mouseY } = useMouse({ type: 'client' })
+const offsetParent = computed(() => menu.value?.$el?.offsetParent)
+const isFixed = computed(() => offsetParent.value == document.body)
+const { x: clientX, y: clientY } = useMouse({ type: 'client' })
+const { width: clientWidth, height: clientHeight } = useWindowSize()
+const { elementX, elementY, elementWidth, elementHeight } = useMouseInElement(offsetParent, { type: 'client' })
+
+const mouseX = computed(() => isFixed.value ? clientX.value : elementX.value)
+const mouseY = computed(() => isFixed.value ? clientY.value : elementY.value)
+const containerHeight = computed(() => isFixed.value ? clientHeight.value : elementHeight.value)
+const containerWidth = computed(() => isFixed.value ? clientWidth.value : elementWidth.value)
+
 const isOpen = ref(false), style = ref({})
 watch(isOpen, async (open) => {
     if (!open) return
@@ -100,14 +110,12 @@ const data = ref()
 async function show(payload) {
     data.value = payload
     isOpen.value = true
-    console.log("open", isOpen.value)
     dismissing?.resolve?.('override')
     dismissing = Promise.withResolvers()
     return dismissing.promise
 }
 async function hide(message) {
     isOpen.value = false
-    console.log("close", isOpen.value)
     if (dismissing) dismissing.resolve(message)
     emit('hide', message)
     dismissing = null
@@ -125,19 +133,21 @@ function pin(state) {
 }
 
 function onpointeroutside(e) {
-    console.log(e)
     if (!dismissible.value || e.handled) return
     if (e.type == "click" || e.type == "contextmenu") hide("dismiss")
 }
-const { width: containerWidth, height: containerHeight } = useWindowSize()
+const className = computed(() => [
+    "z-50",
+    isFixed.value ? "fixed" : "absolute",
+])
 
 defineExpose({ toggle, show, hide, pin, data })
 </script>
 <template>
     <Teleport :to="teleport" :disabled="!teleport">
         <Transition enter-from-class="opacity-0" enter-active-class="transition-opacity duration-200">
-            <Menu ref="menu" variant="contextmenu" v-if="isOpen" :data="data" :style="style" v-bind="$attrs"
-                @pointeroutside="onpointeroutside" v-tw-merge>
+            <Menu ref="menu" variant="contextmenu" v-if="isOpen" :data="data" :style="style" :class="className"
+                v-bind="$attrs" @pointeroutside="onpointeroutside" v-tw-merge>
                 <slot v-bind="{ toggle, show, hide, pin, data }"></slot>
             </Menu>
         </Transition>

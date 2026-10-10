@@ -147,7 +147,7 @@ const btnClassName = computed(() => [
         </div>
     </button>
     <transition enter-from-class="opacity-0" enter-active-class="transition-opacity duration-200">
-        <Menu ref="menu" variant="contextmenu" v-if="isOpen" class="max-w-full z-40" v-bind="$attrs" :style="style"
+        <Menu ref="menu" variant="contextmenu" v-if="isOpen" class="fixed max-w-full z-40" v-bind="$attrs" :style="style"
             v-tw-merge>
             <slot v-bind="{ show, hide, toggle, pin, dismissible, data }"></slot>
         </Menu>

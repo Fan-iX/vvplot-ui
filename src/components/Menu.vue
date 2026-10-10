@@ -12,15 +12,17 @@ function outsideHandler(e) {
         emit("pointeroutside", e)
 }
 onMounted(() => {
-    for (let evt of ["click", "contextmenu", "pointerdown", "pointerup"])
-        document.addEventListener(evt, outsideHandler, { capture: true })
+    setTimeout(() => {
+        for (let evt of ["click", "contextmenu", "pointerdown", "pointerup", "singleclick"])
+            document.addEventListener(evt, outsideHandler, { capture: true })
+    }, 0)
 })
 onUnmounted(() => {
-    for (let evt of ["click", "contextmenu", "pointerdown", "pointerup"])
+    for (let evt of ["click", "contextmenu", "pointerdown", "pointerup", "singleclick"])
         document.removeEventListener(evt, outsideHandler, { capture: true })
 })
 const className = computed(() => [
-    "fixed overflow-auto max-w-full",
+    "overflow-auto max-w-full",
     "bg-white border border-gray-300 rounded-xl",
     variant == "panel" ? "p-4 rounded-xl" : "",
     variant == "contextmenu" ? "flex flex-col p-1" : "",

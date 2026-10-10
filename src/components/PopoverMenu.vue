@@ -151,6 +151,7 @@ function onpointeroutside(e) {
     if (e.type == "click" || e.type == "contextmenu") hide("dismiss")
 }
 const className = computed(() => [
+    "fixed",
     teleport === "body" ? "z-50" : "z-40",
 ])
 </script>
