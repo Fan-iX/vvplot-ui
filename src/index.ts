@@ -1,3 +1,4 @@
+import './styles/style.css'
 import type { App, Plugin } from 'vue'
 import * as components from './components'
 import twMergeDirective from './directive/tw-merge.js'
