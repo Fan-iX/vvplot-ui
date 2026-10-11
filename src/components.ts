@@ -1,5 +1,5 @@
 export { default as VVButton } from './components/Button.vue'
-export { default as VVCheckBox } from './components/CheckBox.vue'
+export { default as VVCheckbox } from './components/Checkbox.vue'
 export { default as VVCheckInput } from './components/CheckInput.vue'
 export { default as VVColorInput } from './components/ColorInput.vue'
 export { default as VVColorPicker } from './components/ColorPicker.vue'
