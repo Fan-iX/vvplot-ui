@@ -120,6 +120,9 @@ const inputClassName = computed(() => [
         </select>
         <input :class="inputClassName" v-model="model" @input="oninput" @change="onchange" :type :placeholder
             :readonly="selectonly" :disabled v-tw-merge />
-        <span class="relative pointer-events-none">▼</span>
+        <svg style="display: inline-block;" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon fill="currentColor" points="2,2 8,12 14,2" />
+        </svg>
     </span>
 </template>
