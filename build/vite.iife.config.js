@@ -20,7 +20,6 @@ export default defineConfig({
     }),
     tailwindcss(),
   ],
-  publicDir: false,
   build: {
     minify: false,
     emptyOutDir: false,
