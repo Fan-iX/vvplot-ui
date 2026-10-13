@@ -27,7 +27,7 @@ export default defineConfig({
       entry: resolve(__dirname, '../src/index.global.ts'),
       name: 'VVPlotUI',
       fileName: 'vvplot-ui',
-      cssFileName: "style.global"
+      cssFileName: "vvplot-ui.global"
     },
     rolldownOptions: {
       external: ['vue'],

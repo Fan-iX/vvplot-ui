@@ -29,7 +29,7 @@
       "types": "./dist/directives.d.ts",
       "import": "./dist/directives.esm.js"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/vvplot-ui.css"
   },
   "homepage": "https://fan-ix.github.io/vvplot-ui/",
   "repository": "https://github.com/Fan-iX/vvplot-ui/",

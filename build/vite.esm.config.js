@@ -32,7 +32,7 @@ export default defineConfig({
       },
       name: 'VVPlotUI',
       fileName: 'vvplot-ui',
-      cssFileName: "style"
+      cssFileName: "vvplot-ui"
     },
     rolldownOptions: {
       external: ['vue', 'tailwind-merge'],
