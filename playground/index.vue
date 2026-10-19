@@ -5,6 +5,7 @@ const text = ref("abc"), color = ref("#FF0000"), flag = ref()
 const options = ref(['option1', { value: 3, label: '' }, { title: '123', label: '...' }])
 const palette = ref(['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#00FFFF', '#FF00FF'])
 const files = ref([])
+const units = { "m": 1000, "in": 25.4, "cm": 10, "mm": 1, "μm": 0.001 }, unit = ref("cm")
 const value = ref([])
 const open = ref(false)
 const width = ref(200), height = ref(100)
@@ -47,6 +48,16 @@ async function showDialog() {
             <VVCheckInput v-model="text" variant="underline">value:</VVCheckInput>
             <VVCheckInput v-model.lazy.number="num" type="number" variant="leftline">value:</VVCheckInput>
             <VVCheckInput placeholder="text" readonly />
+            <span class="-col-end-1"></span>
+            <span>
+                <VVNumberUnitInput v-model="num" :units="units" v-model:unit="unit" disabled />
+            </span>
+            <span>
+                <VVNumberUnitInput v-model="num" :units="units" v-model:unit="unit" variant="underline" />
+            </span>
+            <span>
+                <VVNumberUnitInput v-model="num" :units="units" v-model:unit="unit" variant="leftline" />
+            </span>
             <span class="-col-end-1"></span>
             <VVCheckbox v-model="flag" :coalesce="null" disabled>{{ String(flag) }}</VVCheckbox>
             <VVCheckbox v-model="flag" :coalesce="null">{{ String(flag) }}</VVCheckbox>
