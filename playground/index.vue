@@ -8,13 +8,16 @@ const files = ref([])
 const value = ref([])
 const open = ref(false)
 const width = ref(200), height = ref(100)
+const file = new File(['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -10 38 13"><text font-family="arial" font-size="14">&lt;img&gt;</text></svg>'], 'test.svg', { type: 'image/svg+xml' })
 const menu = useTemplateRef('menu')
+const json = ref({ "id": 1001, "name": "test", "isActive": true, "score": 95.5, "tags": ["json", "test", "sample"], "profile": { "age": 28, "email": "test@example.com" }, "orders": [{ "orderId": "A001", "amount": 199.99, "items": [{ "sku": "X100", "qty": 2 }, { "sku": "X200", "qty": 1 }] }, { "orderId": "A002", "amount": 59.5, "items": [{ "sku": "Y300", "qty": 3 }] }], "matrix": [[1, 2, 3], [4, 5, 6], [7, 8, 9]], "mixedArray": [1, "two", true, null, { "nestedKey": "nestedValue" }, [10, 20]], "emptyObject": {}, "emptyArray": [], "nullValue": null })
+const attrs = ref(["orders", 1, "items", 0, "sku"])
 async function onrightclick() {
-    console.log(await menu.value.show())
+    console.info(await menu.value.show())
 }
 const dialog = useTemplateRef('dialog')
 async function showDialog() {
-    console.log(await dialog.value.show())
+    console.info(await dialog.value.show())
 }
 </script>
 
@@ -45,9 +48,9 @@ async function showDialog() {
             <VVCheckInput v-model.lazy.number="num" type="number" variant="leftline">value:</VVCheckInput>
             <VVCheckInput placeholder="text" readonly />
             <span class="-col-end-1"></span>
-            <VVCheckBox v-model="flag" :coalesce="null" disabled>{{ String(flag) }}</VVCheckBox>
-            <VVCheckBox v-model="flag" :coalesce="null">{{ String(flag) }}</VVCheckBox>
-            <VVCheckBox v-model="flag">{{ String(flag) }}</VVCheckBox>
+            <VVCheckbox v-model="flag" :coalesce="null" disabled>{{ String(flag) }}</VVCheckbox>
+            <VVCheckbox v-model="flag" :coalesce="null">{{ String(flag) }}</VVCheckbox>
+            <VVCheckbox v-model="flag">{{ String(flag) }}</VVCheckbox>
             <span class="-col-end-1"></span>
             <div class="flex flex-col">
                 <VVRadioGroup v-model="text" :options="options" disabled class="disabled:text-blue-500" />
@@ -93,8 +96,15 @@ async function showDialog() {
             <VVFileInput v-model="files" />
             <VVFileInput v-model="files" multiple />
             <VVFileInput v-model="files" multiple disabled />
+            <span class="-col-end-1"></span>
+            <VVImg width="80" />
+            <VVImg :file="file" width="80" />
+            <VVImg width="80"
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTEwIDM4IDEzIj48dGV4dCBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMTQiPiZsdDtpbWcmZ3Q7PC90ZXh0Pjwvc3ZnPg==" />
         </div>
-
+        <div>
+            json<VVAttributePicker v-model="attrs" :data="json" /> == {{attrs.reduce((o, k) => o?.[k], json)}}
+        </div>
         <VVHoverMenu side="top" class="p-2">
             <template #trigger>
                 <VVIcon icon="lucide:circle-question-mark" @click="pin()" inline />
@@ -109,7 +119,7 @@ async function showDialog() {
 
         <VVHoverMenu variant="tooltip" side="top">
             <template #trigger>
-                <VVPopoverMenu variant="contextmenu" align="center" @hide="console.log">
+                <VVPopoverMenu variant="contextmenu" align="center" @hide="console.info">
                     <template #trigger>
                         <VVIcon inline icon="lucide:ellipsis" variant="ghost"
                             class="text-xl cursor-pointer focus:outline-dashed" tabindex="0" />
@@ -131,12 +141,12 @@ async function showDialog() {
                 </VVResizeContainer>
                 <VVMenuButton disabled @click="hide('option1')" class="w-[300px]">option1</VVMenuButton>
                 <VVMenuButton @click="hide('option2')">option2</VVMenuButton>
-                <VVContextmenuSubmenu label="option3" v-slot="{ pin, dismissible }">
+                <VVContextmenuSubmenu label="option3" v-slot="{ pin, dismissible }" class="w-[300px]">
                     <div class="text-right">
                         <VVIcon icon="lucide:pin" @click="pin()"
                             :class="dismissible ? 'text-gray-500' : 'text-blue-500'" inline />
                     </div>
-                    <VVMenuButton @click="hide('option3.1')" class="w-[300px]">
+                    <VVMenuButton @click="hide('option3.1')">
                         option3.1
                     </VVMenuButton>
                     <VVMenuButton @click="hide('option3.2')">

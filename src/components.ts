@@ -1,3 +1,4 @@
+export { default as VVAttributePicker } from './components/AttributePicker.vue'
 export { default as VVButton } from './components/Button.vue'
 export { default as VVCheckbox } from './components/Checkbox.vue'
 export { default as VVCheckInput } from './components/CheckInput.vue'
