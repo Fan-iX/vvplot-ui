@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { Icon } from '@iconify/vue'
+import IconLucideChevronRight from '~icons/lucide/chevron-right'
 const open = defineModel("open", { type: Boolean, default: false })
 const { class: $class, summaryClass, hardClip } = defineProps({
     class: { type: String, default: '' }, summaryClass: null, hardClip: Boolean
@@ -18,8 +18,7 @@ const className = computed(() => {
         <summary @click.prevent class="marker:content-['']" :class="summaryClass">
             <div class="contents" @click="open = !open">
                 <slot name="trigger" :open>
-                    <Icon icon="lucide:chevron-right"
-                        class="text-lg cursor-pointer duration-200 inline-block align-middle"
+                    <IconLucideChevronRight class="text-lg cursor-pointer duration-200 inline-block align-middle"
                         :class="{ 'rotate-90': open }" />
                 </slot>
             </div>

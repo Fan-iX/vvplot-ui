@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, onMounted, onUnmounted } from 'vue'
-import { Icon } from '@iconify/vue'
+import IconLucideLoaderCircle from '~icons/lucide/loader-circle'
 defineOptions({ inheritAttrs: false })
 const { src, file, loading, placeholderClass } = defineProps({
     src: String, file: File,
@@ -37,7 +37,7 @@ onUnmounted(() => {
 <template>
     <slot name="loading" v-if="(filesrc ?? src) != null && isLoading">
         <span :class="placeholderClass">
-            <Icon icon="lucide:loader-circle" class="animate-spin" inline /> Loading ...
+            <IconLucideLoaderCircle class="animate-spin" inline /> Loading ...
         </span>
     </slot>
     <img :src="filesrc ?? src" :loading @load="onLoad" @error="onError" v-bind="$attrs" :key="filesrc ?? src" />

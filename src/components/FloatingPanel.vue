@@ -1,6 +1,7 @@
 <script setup>
 import { computed, watch, nextTick, useTemplateRef, inject, ref } from 'vue'
-import { Icon } from '@iconify/vue'
+import IconLucideMinus from '~icons/lucide/minus'
+import IconLucideX from '~icons/lucide/x'
 import { useResizeObserver } from '@vueuse/core'
 defineOptions({ inheritAttrs: false })
 const { title, contentClass } = defineProps({
@@ -118,10 +119,10 @@ const resizeControls = computed(() => {
                         <slot name="title">
                             <h3 class="font-semibold whitespace-nowrap truncate">{{ title }}</h3>
                         </slot>
-                        <Icon icon="lucide:minus" @click="fold = !fold" @pointerdown.stop
-                            class="text-xl hover:bg-gray-200 rounded-md cursor-default" />
-                        <Icon icon="lucide:x" @click="hide" @pointerdown.stop
-                            class="text-xl hover:bg-gray-200 rounded-md cursor-default" />
+                        <IconLucideMinus @click="fold = !fold" @pointerdown.stop
+                            class="text-xl hover:bg-gray-200 rounded-sm cursor-default" />
+                        <IconLucideX @click="hide" @pointerdown.stop
+                            class="text-xl hover:bg-gray-200 rounded-sm cursor-default" />
                     </div>
                 </slot>
             </div>

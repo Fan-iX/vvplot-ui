@@ -2,6 +2,7 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import Icons from 'unplugin-icons/vite'
 import tailwindcss from '@tailwindcss/vite'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -18,6 +19,7 @@ export default defineConfig({
         }
       }
     }),
+    Icons({ scale: 1 }),
     tailwindcss(),
   ],
   build: {

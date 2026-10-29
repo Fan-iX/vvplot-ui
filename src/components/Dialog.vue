@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { Icon } from '@iconify/vue'
-import Button from './Button.vue';
+import IconLucideX from '~icons/lucide/x'
+import Button from './Button.vue'
 defineOptions({ inheritAttrs: false })
 const { title, dismissible } = defineProps({
     title: String,
@@ -44,8 +44,7 @@ function onmaskclick(e) {
             <div class="min-w-96 p-4 flex flex-col bg-white rounded-xl" v-bind="$attrs" v-tw-merge>
                 <div class="flex items-center justify-between">
                     <h3 class="font-semibold">{{ title }}</h3>
-                    <Icon icon="lucide:x" @click="hide('dismiss')"
-                        class="text-xl hover:bg-gray-200 rounded-md cursor-default" />
+                    <IconLucideX @click="hide('dismiss')" class="text-xl hover:bg-gray-200 rounded-sm cursor-default" />
                 </div>
                 <slot v-bind="{ toggle, show, hide, isOpen, data }"></slot>
                 <div class="flex gap-2 flex-row-reverse">

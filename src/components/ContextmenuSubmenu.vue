@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch, computed, useTemplateRef, nextTick } from 'vue'
 import { useWindowSize, useElementHover } from '@vueuse/core'
-import { Icon } from '@iconify/vue'
+import IconLucideChevronRight from '~icons/lucide/chevron-right'
 import Menu from './Menu.vue'
 defineOptions({ inheritAttrs: false })
 const {
@@ -143,12 +143,12 @@ const btnClassName = computed(() => [
             {{ label }}
         </slot>
         <div class="absolute right-1 top-0 bottom-0 flex items-center">
-            <Icon icon="lucide:chevron-right" />
+            <IconLucideChevronRight />
         </div>
     </button>
     <transition enter-from-class="opacity-0" enter-active-class="transition-opacity duration-200">
-        <Menu ref="menu" variant="contextmenu" v-if="isOpen" class="fixed max-w-full z-40" v-bind="$attrs" :style="style"
-            v-tw-merge>
+        <Menu ref="menu" variant="contextmenu" v-if="isOpen" class="fixed max-w-full z-40" v-bind="$attrs"
+            :style="style" v-tw-merge>
             <slot v-bind="{ show, hide, toggle, pin, dismissible, data }"></slot>
         </Menu>
     </transition>
