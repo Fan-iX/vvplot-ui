@@ -118,9 +118,9 @@ const resizeControls = computed(() => {
                         <slot name="title">
                             <h3 class="font-semibold whitespace-nowrap truncate">{{ title }}</h3>
                         </slot>
-                        <Icon icon="heroicons:minus-20-solid" @click="fold = !fold" @pointerdown.stop
+                        <Icon icon="lucide:minus" @click="fold = !fold" @pointerdown.stop
                             class="text-xl hover:bg-gray-200 rounded-md cursor-default" />
-                        <Icon icon="heroicons:x-mark-20-solid" @click="hide" @pointerdown.stop
+                        <Icon icon="lucide:x" @click="hide" @pointerdown.stop
                             class="text-xl hover:bg-gray-200 rounded-md cursor-default" />
                     </div>
                 </slot>

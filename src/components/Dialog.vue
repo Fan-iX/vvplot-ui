@@ -44,8 +44,8 @@ function onmaskclick(e) {
             <div class="min-w-96 p-4 flex flex-col bg-white rounded-xl" v-bind="$attrs" v-tw-merge>
                 <div class="flex items-center justify-between">
                     <h3 class="font-semibold">{{ title }}</h3>
-                    <Icon icon="heroicons:x-mark-20-solid" @click="hide('dismiss')"
-                        class="text-lg hover:bg-gray-200 rounded-md" />
+                    <Icon icon="lucide:x" @click="hide('dismiss')"
+                        class="text-xl hover:bg-gray-200 rounded-md cursor-default" />
                 </div>
                 <slot v-bind="{ toggle, show, hide, isOpen, data }"></slot>
                 <div class="flex gap-2 flex-row-reverse">
